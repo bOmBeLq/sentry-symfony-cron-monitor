@@ -7,7 +7,7 @@ This extension allows to configure sentry cron monitoring with pretty much any s
 
 1. Make sure you setup base sentry-symfony extension https://github.com/getsentry/sentry-symfony
 2. `composer require bml/sentry-symfony-cron-monitor`
-3. Enable `SentryCronMonitorBundle` in your `bundles.php` or `Kernel`
+3. Enable `SentryCronMonitorBundle` in your `bundles.php` or `Kernel` (it may be automatically added by SF flex)
 
 ### Usage
 
@@ -50,5 +50,5 @@ To run tests against specific php version use
 ### php-cs-fixer
 
 Run `.docker/bin/run-php-cs-fixer.sh`  
-Beware this command internally runs `.docker/bin/setup-dev.sh 8.1` (changes container php-version, this could be fixed but im too lazy)
+Beware this command internally runs `.docker/bin/setup-dev.sh 8.1` (changes container php-version)
 
