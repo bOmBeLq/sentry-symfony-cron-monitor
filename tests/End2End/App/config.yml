@@ -1,0 +1,23 @@
+sentry:
+  dsn: http://public@example.com/sentry/1
+
+framework:
+  test: ~
+
+services:
+  test.hub:
+    alias: Sentry\State\HubInterface
+    public: true
+
+  test.bmL\SentryCronMonitorBundle\CronMonitoring\CronMonitorFactory:
+    alias: bmL\SentryCronMonitorBundle\CronMonitoring\CronMonitorFactory
+    public: true
+
+  bmL\SentryCronMonitorBundle\Tests\End2End\App\Command\ErrorCommand:
+    tags: [{ name: 'console.command', command: 'error-command' }]
+
+  bmL\SentryCronMonitorBundle\Tests\End2End\App\Command\SuccessCommand:
+    tags: [{ name: 'console.command', command: 'success-command' }]
+
+  logger:
+    class: Psr\Log\NullLogger
