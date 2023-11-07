@@ -4,6 +4,7 @@
     "description": "Symfony cron monitoring integration for Sentry (http://getsentry.com)",
     "keywords": ["logging", "errors", "symfony", "sentry", "cron"],
     "homepage": "http://getsentry.com",
+    "license": "MIT",
     "require": {
         "php": "^7.2||^8.0",
         "sentry/sentry": "^3.20.1",
