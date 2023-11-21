@@ -1,0 +1,2 @@
+0 0     *   * * root  /app/bin/console some:command --some-arg some_val --cron-monitor-slug=some_slug
+* *     * * * root  /app/bin/console some:other:command --cron-monitor-slug=some_slug_2
