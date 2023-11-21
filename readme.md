@@ -28,6 +28,12 @@ Optionally you can also set max run time and check margin (see https://docs.sent
 0 0 * * *   user    /app/bin/console app:statistics:update --cron-monitor-slug=statistics_update_midnight --cron-monitor-schedule "0 0 * * *" --cron-monitor-max-time=5 --cron-monitor-check-margin=2
 ```
 
+#### Crontab helper command
+The `bml:sentry-symfony-cron-monitor:add-schedule-argument-to-crontab` command will take crontab file path and will add the 
+`--cron-monitor-schedule=THE_SCHEDULE` to lines containing `--cron-monitor-slug`.   
+This way the crontab file can be more DRY because you don't need to keep the --cron-monitor-schedule=THE_SCHEDULE.
+Instead it's auto added during deploy/build. Just use this command in your ci/cd.
+
 ## Development
 
 ## Setup
@@ -37,7 +43,7 @@ eg. `.docker/bin/setup-dev.sh 8.1`
 Default php version is 7.2 `.docker/bin/setup-dev.sh`
 
 ### Tests
-
+    
 Run `.docker/bin/run-tests.sh`  
 For xdebug experience `.docker/bin/run-tests-xdebug.sh`  
 To run tests against specific php version use

@@ -13,6 +13,10 @@ services:
     alias: bmL\SentryCronMonitorBundle\CronMonitoring\CronMonitorFactory
     public: true
 
+  test.bmL\SentryCronMonitorBundle\Command\AddScheduleArgumentToCrontabCommand:
+    alias: bmL\SentryCronMonitorBundle\Command\AddScheduleArgumentToCrontabCommand
+    public: true
+
   bmL\SentryCronMonitorBundle\Tests\End2End\App\Command\ErrorCommand:
     tags: [{ name: 'console.command', command: 'error-command' }]
 
