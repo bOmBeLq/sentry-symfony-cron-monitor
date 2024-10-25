@@ -10,9 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AddScheduleArgumentToCrontabCommand extends Command
 {
-    public function __construct(private CrontabFileHelper $crontabFileHelper)
+    public function __construct(private CrontabFileHelper $crontabFileHelper, ?string $name = null)
     {
-        parent::__construct();
+        parent::__construct($name);
     }
 
     protected function configure(): void
