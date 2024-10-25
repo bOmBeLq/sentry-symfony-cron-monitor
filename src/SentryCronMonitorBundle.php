@@ -12,7 +12,7 @@ final class SentryCronMonitorBundle extends Bundle
 {
     public const SDK_IDENTIFIER = 'sentry.php.symfony';
 
-    public const SDK_VERSION = '4.0.1';
+    public const SDK_VERSION = '5.0.1';
 
     public function build(ContainerBuilder $container): void
     {
