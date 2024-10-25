@@ -10,14 +10,8 @@ use Sentry\State\HubInterface;
 
 class CronMonitorFactory
 {
-    /**
-     * @var HubInterface
-     */
-    private $hub;
-
-    public function __construct(HubInterface $hub)
+    public function __construct(private HubInterface $hub)
     {
-        $this->hub = $hub;
     }
 
     public function create(string $slug, string $schedule, ?int $checkMarginMinutes = null, ?int $maxRuntimeMinutes = null): CronMonitor

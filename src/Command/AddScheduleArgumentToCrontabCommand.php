@@ -10,18 +10,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AddScheduleArgumentToCrontabCommand extends Command
 {
-    /**
-     * @var CrontabFileHelper
-     */
-    private $crontabFileHelper;
-
-    public function __construct(CrontabFileHelper $crontabFileHelper)
+    public function __construct(private CrontabFileHelper $crontabFileHelper)
     {
-        $this->crontabFileHelper = $crontabFileHelper;
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('bml:sentry-symfony-cron-monitor:add-schedule-argument-to-crontab')
@@ -29,12 +23,10 @@ class AddScheduleArgumentToCrontabCommand extends Command
             ->addArgument('crontab-file', InputArgument::REQUIRED, 'crontab file path');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $file = $input->getArgument('crontab-file');
         $this->crontabFileHelper->addScheduleArgumentToCrontabFileContents($file);
         return Command::SUCCESS;
     }
-
-
 }

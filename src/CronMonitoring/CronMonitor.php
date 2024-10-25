@@ -10,31 +10,10 @@ use Sentry\State\HubInterface;
 
 class CronMonitor
 {
-    /**
-     * @var MonitorConfig
-     */
-    private $monitorConfig;
+    private string $checkInId;
 
-    /**
-     * @var HubInterface
-     */
-    private $hub;
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
-     * @var string
-     */
-    private $checkInId;
-
-    public function __construct(HubInterface $hub, MonitorConfig $monitorConfig, string $slug)
+    public function __construct(private HubInterface $hub, private MonitorConfig $monitorConfig, private string $slug)
     {
-        $this->hub = $hub;
-        $this->monitorConfig = $monitorConfig;
-        $this->slug = $slug;
     }
 
     public function start(): void
