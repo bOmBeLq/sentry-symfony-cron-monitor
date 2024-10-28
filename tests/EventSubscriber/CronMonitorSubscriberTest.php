@@ -87,17 +87,10 @@ class CronMonitorSubscriberTest extends TestCase
         $eventDispatcher->addSubscriber(new CronMonitorSubscriber($cronMonitorFactory));
 
         // Act
-        $input = $this->createMock(InputInterface::class);
+        $inputDefinition = new InputDefinition();
+        $input = new ArrayInput([], $inputDefinition);
 
         $event = new ConsoleCommandEvent(null, $input, new NullOutput());
-
-        $input->expects(self::once())
-            ->method('hasOption')
-            ->with('cron-monitor-slug')
-            ->willReturn(false);
-
-        $input->expects(self::never())
-            ->method('getOption');
 
         $cronMonitorFactory->expects(self::never())
             ->method('create');
