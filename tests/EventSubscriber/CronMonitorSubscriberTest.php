@@ -15,6 +15,7 @@ use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -88,12 +89,13 @@ class CronMonitorSubscriberTest extends TestCase
         // Act
         $inputDefinition = new InputDefinition();
         $input = new ArrayInput([], $inputDefinition);
+
         $event = new ConsoleCommandEvent(null, $input, new NullOutput());
 
-        $eventDispatcher->dispatch($event, ConsoleEvents::COMMAND);
+        $cronMonitorFactory->expects(self::never())
+            ->method('create');
 
-        // Assert
-        // Not easily possible with phpunit :( Main assert is in Arrange section
+        $eventDispatcher->dispatch($event, ConsoleEvents::COMMAND);
     }
 
     public function testOnConsoleCommandTerminate()

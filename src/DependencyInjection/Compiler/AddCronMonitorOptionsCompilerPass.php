@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class AddCronMonitorOptionsCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $optionsArguments = [
             ['--cron-monitor-slug', null, InputOption::VALUE_REQUIRED, 'if command should be monitored then pass cron monitor slug'],

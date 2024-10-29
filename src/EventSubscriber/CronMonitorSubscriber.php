@@ -14,26 +14,26 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CronMonitorSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var CronMonitorFactory
-     */
-    private $cronMonitorFactory;
+    private ?CronMonitor $cronMonitor = null;
 
-    /**
-     * @var ?CronMonitor
-     */
-    private $cronMonitor = null;
-
-    public function __construct(CronMonitorFactory $cronMonitorFactory)
+    public function __construct(private CronMonitorFactory $cronMonitorFactory)
     {
-        $this->cronMonitorFactory = $cronMonitorFactory;
     }
 
-    public function onConsoleCommandStart(ConsoleCommandEvent $event)
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            ConsoleEvents::COMMAND => 'onConsoleCommandStart',
+            ConsoleEvents::TERMINATE => 'onConsoleCommandTerminate',
+        ];
+    }
+
+    public function onConsoleCommandStart(ConsoleCommandEvent $event): void
     {
         if (!$event->getInput()->hasOption('cron-monitor-slug')) {
             return; // Cron monitor not enabled in application
         }
+
         $slug = $event->getInput()->getOption('cron-monitor-slug');
         $schedule = $event->getInput()->getOption('cron-monitor-schedule');
         $maxTime = $event->getInput()->getOption('cron-monitor-max-time');
@@ -45,7 +45,7 @@ class CronMonitorSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onConsoleCommandTerminate(ConsoleTerminateEvent $event)
+    public function onConsoleCommandTerminate(ConsoleTerminateEvent $event): void
     {
         if ($this->cronMonitor) {
             if (Command::SUCCESS === $event->getExitCode()) {
@@ -54,13 +54,5 @@ class CronMonitorSubscriber implements EventSubscriberInterface
                 $this->cronMonitor->finishError();
             }
         }
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            ConsoleEvents::COMMAND => 'onConsoleCommandStart',
-            ConsoleEvents::TERMINATE => 'onConsoleCommandTerminate',
-        ];
     }
 }
